@@ -1,0 +1,43 @@
+@font-face { font-family:Medieval;src: url('PrinceValiant.ttf');}
+
+html * {
+	font-family:Medieval
+}
+
+
+.grid-container {
+	display: grid;
+	border: 1px solid black;
+	grid-template-columns: auto auto auto
+}
+
+.grid-item {
+	
+	
+}
+
+.input-container {
+	display: inline-grid;
+	grid-template-columns: auto auto;
+	grid-row-gap: 2px;
+}
+
+#map {
+	height: 100%;
+}
+
+
+.input-item {	
+
+
+}
+
+#libsearch {
+	transform: scale(2);
+	transform-origin: 0 0;	
+}
+
+#submit {
+	
+}
+
