@@ -2,6 +2,13 @@
 
 	include 'connection.php';
 	//error_reporting(E_ERROR | E_PARSE);
+	
+	
+	if (!defined('ENT_SUBSTITUTE')) {
+		define('ENT_SUBSTITUTE', "'");                                                
+	}
+	
+	
 	if($connected)
 	{
 		
@@ -78,16 +85,26 @@
 				$i=0;
 				foreach ($librariesData as $data)
 				{
+					
+					$re = "/[^(\\x20-\\x7F\\n)]+/u";
+					$enc = utf8_encode($data['library']);
+					$subst = "'";
+					$libName = preg_replace($re,$subst,$enc);
+					
 					if($countryID != "")
 					{
-						$jsonObj = "<option value='library{$i}'>".utf8_encode($data['library'])."</option>";
+						
+						$jsonObj = "<option value='library{$i}'>". $libName."</option>";
 						$jsonObjs[] = $jsonObj;
 					}else{
 						if($countryPost != "All")
 						{
-							echo "<option value='library{$i}'>".utf8_encode($data['library'])."</option>\n";
+							$re = "/[^(\\x20-\\x7F\\n)]+/u";
+							$enc = utf8_encode($data['library']);
+							$subst = "'";
+							echo "<option value='library{$i}'>".$libName."</option>\n";
 						}else{
-							$jsonObj = "<option value='library{$i}'>".utf8_encode($data['library'])."</option>\n";
+							$jsonObj = "<option value='library{$i}'>".$libName."</option>\n";
 							$jsonObjs[] = $jsonObj;
 						}
 					}

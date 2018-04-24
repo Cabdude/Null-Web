@@ -3,7 +3,7 @@
 ?>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta content="text/html; charset=UTF-8"/>
 		<link rel="stylesheet" type="text/css" href="cantusstyle.css">	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>		
 		<script type="text/javascript" src="maphelper.js"></script>	
@@ -31,6 +31,10 @@
 						<select id="libraries">
 							<?php loadLibraries($librariesData);?>								
 						</select>
+						
+						<script>
+							document.getElementById("libraries").selectedIndex = -1;
+						</script>
 					</div>						
 				</div>
 					
@@ -44,7 +48,7 @@
 		
 		</div>
 		
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnDhlZqdndiNq0tPLxlOgNYMDMXBVZ0Ks&callback=initMap"async defer></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnDhlZqdndiNq0tPLxlOgNYMDMXBVZ0Ks&callback=initMap" type="text/javascript"></script>
 	
 	</body>
 	
