@@ -6,22 +6,30 @@ $(document).ready(function(){
 		console.log(selected);
 			
 		
-			
-			
-		$.post('load.php', {countryName: selected}, function(data){
-			
-			var libraries = $("#libraries");
-			libraries.empty();
-			console.log(data);
-			
-			var jsonLibs = $.parseJSON(data);
-				
-			$.each(jsonLibs,function(index,library)
-			{
-				libraries.append(library);
-			});//end iteration
-			
-		});//end post
+	
+		
+			$.post('search.php', {countryName: selected}, function(data){
+				try {	
+					var libraries = $("#libraries");
+					libraries.empty();
+					console.log(data);
+					
+					var jsonLibs = $.parseJSON(data);
+						
+					$.each(jsonLibs,function(index,library)
+					{
+						libraries.append(library);
+					});//end iteration
+					
+					highlightCountry(selected);	
+				}
+				catch(err)
+				{
+					highlightNone()
+				}
+			});//end post
+		
+		
 		
 	});//end onchange
 

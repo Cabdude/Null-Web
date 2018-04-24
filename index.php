@@ -1,13 +1,13 @@
 <?php
-	include 'load.php';		
+	include 'search.php';		
 ?>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="cantusstyle.css">	
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="search_help.js"></script>	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>		
 		<script type="text/javascript" src="maphelper.js"></script>	
+		<script type="text/javascript" src="search_help.js"></script>	
 	</head>
 		
 	<body>
@@ -37,7 +37,15 @@
 			</div>
 			
 			
+			<div class="grid-item"></div>
+			<div class="grid-item-map">
+				<div id="map"></div>
+			</div>
+		
 		</div>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnDhlZqdndiNq0tPLxlOgNYMDMXBVZ0Ks&callback=initMap"async defer></script>
+	
 	</body>
 	
 
