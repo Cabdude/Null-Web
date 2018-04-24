@@ -26,13 +26,10 @@ html * {
 
 .grid-item-map {
 	height: 100%;
-	width: 100%;
 	grid-area:main;
 }
 
 .input-container {
-	height: 100%;
-	width: 100%;
 	display: inline-grid;
 	grid-template-columns: auto auto;
 	grid-row-gap: 2px;	
