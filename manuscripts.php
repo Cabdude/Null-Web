@@ -78,6 +78,9 @@
                         }
 
                         echo "<button type=\"button\" onclick=\"alert('PDF Generation Coming Soon')\">Generate Manuscript PDF</button>";
+                        echo "<form>
+                        <input type=\"button\" value=\"Homepage\" onclick=\"window.location.href='/Null-Web'\" />
+                        </form>";
                     echo "</div>";
                 }
             ?>
