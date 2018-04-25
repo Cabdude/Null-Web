@@ -12,7 +12,7 @@ function initMap()
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: new google.maps.LatLng(30,0),
 	  zoom: 3,
-	  mapTypeId: google.maps.MapTypeId.ROADMAP
+	  mapTypeId: google.maps.MapTypeId.HYBRID
 	});
 	
 	map_zoom_original = map.zoom;
@@ -20,14 +20,54 @@ function initMap()
 	
 }
 
+function mapProvenance(provenance)
+{
+	clearOverlays();
+
+	if(map == null){
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: new google.maps.LatLng(30,0),
+            zoom: 3,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        });
+	}
+
+	if(geocoder == null){
+        geocoder = new google.maps.Geocoder();
+	}
+
+	var address = provenance;
+	console.log("Called.");
+    geocoder.geocode({'address':address},function(results,status) {
+        if(status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+            markerArray.push(marker);
+            map.setZoom(10);
+            map.setCenter(marker.getPosition());
+            console.log("geocoded");
+            clearHighlights();
+        } else{
+        	return false;
+        }
+    });
+
+}
+
+
 
 function clearOverlays()
 {
-	world_geometry.setMap(null);
-	 for (var i = 0; i < markerArray.length; i++ ) {
-		markerArray[i].setMap(null);
-	}
-	markerArray.length = 0;
+	if(world_geometry != null) {
+        world_geometry.setMap(null);
+        for (var i = 0; i < markerArray.length; i++) {
+            markerArray[i].setMap(null);
+        }
+        markerArray.length = 0;
+    }
 }
 
 function geocodeLibraryAddress(geocoder, resultsMap, libraryName, countryName)
@@ -83,14 +123,16 @@ function clearHighlights(){
 function highlightCountry(countryName)
 {
 	clearOverlays();
-	if(countryName == "Great Britain")
-	{
-		countryName = "United Kingdom";
-	}else if(countryName == "All"){
+	var countryN = countryName;
+	if(countryName === "Great Britain") {
+        countryN = "United Kingdom";
+    }
+
+	if(countryName == "All"){
 		highlightWholeMap();
 	}else{
 			
-		var clause = "'CountryName'="+ "'" + countryName + "'";
+		var clause = "'CountryName'="+ "'" + countryN + "'";
 		
 		world_geometry = new google.maps.FusionTablesLayer({
 		  query: {
@@ -104,7 +146,7 @@ function highlightCountry(countryName)
 		});
 		
 		
-		geocoder.geocode({'address':countryName},function(results,status) {
+		geocoder.geocode({'address':countryN},function(results,status) {
 			if(status === 'OK') {
 			
 				map.zoom = map_zoom_original;
